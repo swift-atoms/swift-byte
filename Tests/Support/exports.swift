@@ -1,3 +1,3 @@
-@_exported public import Byte_Primitives
-@_exported public import Byte_Primitives_Standard_Library_Integration
-@_exported public import Ownership_Primitives_Test_Support
+@_exported public import Byte
+@_exported public import Byte_Standard_Library_Integration
+@_exported public import Ownership_Test_Support

@@ -1,4 +1,4 @@
-import Byte_Test_Support
+import Byte
 import Testing
 
 extension Byte {

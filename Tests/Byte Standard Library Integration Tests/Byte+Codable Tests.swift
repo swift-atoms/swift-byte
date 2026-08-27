@@ -1,6 +1,7 @@
 import Testing
 
 @testable import Byte
+import Byte_Standard_Library_Integration
 
 extension Byte {
     @Suite struct `Codable Test` {

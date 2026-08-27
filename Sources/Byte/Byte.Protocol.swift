@@ -1,5 +1,3 @@
-public import Byte_Primitive
-
 extension Byte {
 
     public protocol `Protocol` {

@@ -13,10 +13,6 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Byte Primitive",
-            targets: ["Byte Primitive"]
-        ),
-        .library(
             name: "Byte Protocol",
             targets: ["Byte Protocol"]
         ),
@@ -47,69 +43,60 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-carrier.git",
+            url: "https://github.com/swift-atoms/swift-carrier.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-tagged.git",
+            url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ownership.git",
+            url: "https://github.com/swift-atoms/swift-ownership.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-bit.git",
+            url: "https://github.com/swift-atoms/swift-bit.git",
             branch: "main"
         ),
     ],
     targets: [
         .target(
-            name: "Byte Primitive",
+            name: "Byte",
             dependencies: []
         ),
         .target(
             name: "Byte Protocol",
             dependencies: [
-                "Byte Primitive",
+                .target(name: "Byte"),
                 .product(name: "Carrier", package: "swift-carrier"),
             ]
         ),
         .target(
             name: "Byte Borrowed",
             dependencies: [
-                "Byte Protocol",
+                .target(name: "Byte Protocol"),
                 .product(name: "Ownership", package: "swift-ownership"),
             ]
         ),
         .target(
             name: "Byte Tagged",
             dependencies: [
-                "Byte Protocol",
+                .target(name: "Byte Protocol"),
                 .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
         .target(
             name: "Byte Bit",
             dependencies: [
-                "Byte Primitive",
-                .product(name: "Bit Primitive", package: "swift-bit"),
+                .target(name: "Byte"),
+                .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Bit Pattern", package: "swift-bit"),
-            ]
-        ),
-        .target(
-            name: "Byte",
-            dependencies: [
-                "Byte Primitive",
-                "Byte Protocol",
-                "Byte Borrowed",
-                "Byte Tagged",
             ]
         ),
         .target(
             name: "Byte Standard Library Integration",
             dependencies: [
-                "Byte",
+                .target(name: "Byte"),
                 .product(
                     name: "Carrier Standard Library Integration",
                     package: "swift-carrier"
@@ -119,10 +106,10 @@ let package = Package(
         .target(
             name: "Byte Test Support",
             dependencies: [
-                "Byte",
-                "Byte Standard Library Integration",
+                .target(name: "Byte"),
+                .target(name: "Byte Standard Library Integration"),
                 .product(
-                    name: "Ownership Test Support",
+                    name: "Ownership",
                     package: "swift-ownership"
                 ),
             ],
@@ -131,24 +118,24 @@ let package = Package(
         .testTarget(
             name: "Byte Tests",
             dependencies: [
-                "Byte",
-                "Byte Test Support",
+                .target(name: "Byte"),
+                .target(name: "Byte Test Support"),
             ]
         ),
         .testTarget(
             name: "Byte Standard Library Integration Tests",
             dependencies: [
-                "Byte",
-                "Byte Standard Library Integration",
-                "Byte Test Support",
+                .target(name: "Byte"),
+                .target(name: "Byte Standard Library Integration"),
+                .target(name: "Byte Test Support"),
             ]
         ),
         .testTarget(
             name: "Byte Bit Tests",
             dependencies: [
-                "Byte Bit",
-                "Byte Test Support",
-                .product(name: "Bit Primitive", package: "swift-bit"),
+                .target(name: "Byte Bit"),
+                .target(name: "Byte Test Support"),
+                .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Bit Pattern", package: "swift-bit"),
             ]
         ),

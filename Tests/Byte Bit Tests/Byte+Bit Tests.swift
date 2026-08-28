@@ -1,5 +1,5 @@
 import Bit_Pattern
-import Bit_Primitive
+import Bit
 import Byte_Bit
 import Byte_Test_Support
 import Testing

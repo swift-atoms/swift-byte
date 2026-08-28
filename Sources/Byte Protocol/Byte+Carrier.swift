@@ -1,4 +1,4 @@
-public import Byte_Primitive
+public import Byte
 public import Carrier
 
 extension Byte: Carrier.`Protocol` {

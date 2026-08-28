@@ -1,6 +1,6 @@
 public import Bit_Pattern
-public import Bit_Primitive
-public import Byte_Primitive
+public import Bit
+public import Byte
 
 extension Byte {
 

@@ -1,4 +1,4 @@
-public import Byte_Primitive
+public import Byte
 public import Byte_Protocol
 public import Tagged
 

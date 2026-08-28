@@ -1,4 +1,4 @@
-# Byte
+# Byte Primitives
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -46,7 +46,7 @@ let back: UInt8 = UInt8(asByte)        // 0x42
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-byte.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main")
 ]
 ```
 
@@ -69,7 +69,7 @@ Three library products covering the bare type, its standard-library integration,
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Byte` | `Sources/Byte/` | The `Byte` struct — Carrier.Protocol conformance, bitwise operations, stdlib conformances (Equatable, Hashable, Sendable, Comparable, ExpressibleByIntegerLiteral). |
+| `Byte Primitives` | `Sources/Byte Primitives/` | The `Byte` struct — Carrier.Protocol conformance, bitwise operations, stdlib conformances (Equatable, Hashable, Sendable, Comparable, ExpressibleByIntegerLiteral). |
 | `Byte Standard Library Integration` | `Sources/Byte Standard Library Integration/` | Bridges between `Byte` and `UInt8`: `UInt8.byte` accessor and `UInt8(_:Byte)` conversion. |
 | `Byte Test Support` | `Tests/Support/` | Re-exports the umbrella + Carrier Test Support fixtures for downstream test consumers. |
 
@@ -96,9 +96,9 @@ Foundation-free.
 
 ## Related Packages
 
-- [`swift-carrier`](https://github.com/swift-molecules/swift-carrier) — `Carrier.Protocol`, the phantom-typed wrapper protocol `Byte` conforms to (`Underlying = UInt8`, `Domain = Never`).
-- [`swift-tagged`](https://github.com/swift-molecules/swift-tagged) — phantom-type infrastructure underlying the `Carrier` surface.
-- [`swift-ownership`](https://github.com/swift-molecules/swift-ownership) — ownership and lifetime annotations used across the primitive.
+- [`swift-carrier`](https://github.com/swift-atoms/swift-carrier) — `Carrier.Protocol`, the phantom-typed wrapper protocol `Byte` conforms to (`Underlying = UInt8`, `Domain = Never`).
+- [`swift-tagged`](https://github.com/swift-atoms/swift-tagged) — phantom-type infrastructure underlying the `Carrier` surface.
+- [`swift-ownership`](https://github.com/swift-atoms/swift-ownership) — ownership and lifetime annotations used across the primitive.
 
 ---
 

@@ -1,5 +1,5 @@
 #if !hasFeature(Embedded)
-    public import Byte
+    public import Byte_Primitive
 
     extension Byte: Codable {
 

@@ -1,5 +1,4 @@
-import Byte
-import Byte_Standard_Library_Integration
+import Byte_Test_Support
 import Testing
 
 extension Byte {

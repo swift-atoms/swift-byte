@@ -1,4 +1,4 @@
-import Byte
+import Byte_Test_Support
 import Testing
 
 extension Byte.Test {
@@ -11,6 +11,8 @@ extension Byte.Test.Law {
     static let domain: [Byte] = (UInt8.min...UInt8.max).map { Byte($0) }
 
     static let probes: [Byte] = [0x00, 0x01, 0x0F, 0x55, 0x7F, 0x80, 0xAA, 0xF0, 0xFE, 0xFF]
+
+    enum Checksum {}
 }
 
 extension Byte.Test.Unit {
@@ -32,6 +34,13 @@ extension Byte.Test.Unit {
     func `byte-axis projection is the identity on Byte`() {
         for byte in Byte.Test.Law.domain {
             #expect(byte.byte == byte)
+        }
+    }
+
+    @Test
+    func `description matches the underlying decimal rendering`() {
+        for byte in Byte.Test.Law.domain {
+            #expect(byte.description == byte.underlying.description)
         }
     }
 }
@@ -185,5 +194,48 @@ extension Byte.Test.`Edge Case` {
         }
         #expect(Byte.zero == Byte(0x00))
         #expect(Byte.max == Byte(0xFF))
+    }
+}
+
+extension Byte.Test.Integration {
+    @Test
+    func `Tagged bytes inherit bitwise semantics unchanged`() {
+        for a in Byte.Test.Law.probes {
+            for b in Byte.Test.Law.probes {
+                let taggedA = Tagged<Byte.Test.Law.Checksum, Byte>(a)
+                let taggedB = Tagged<Byte.Test.Law.Checksum, Byte>(b)
+                #expect((taggedA & taggedB).byte == a & b)
+                #expect((taggedA | taggedB).byte == a | b)
+                #expect((taggedA ^ taggedB).byte == a ^ b)
+                #expect((~taggedA).byte == ~a)
+            }
+        }
+    }
+
+    @Test
+    func `Tagged bytes inherit shift semantics unchanged`() {
+        for byte in Byte.Test.Law.probes {
+            let tagged = Tagged<Byte.Test.Law.Checksum, Byte>(byte)
+            for amount in [0, 1, 4, 7, 8] as [UInt8] {
+                #expect((tagged << amount).byte == byte << amount)
+                #expect((tagged >> amount).byte == byte >> amount)
+            }
+        }
+    }
+
+    @Test
+    func `Tagged bytes inherit order and extremes`() {
+        let zero: Tagged<Byte.Test.Law.Checksum, Byte> = .zero
+        let max: Tagged<Byte.Test.Law.Checksum, Byte> = .max
+        #expect(zero.byte == Byte(0x00))
+        #expect(max.byte == Byte(0xFF))
+        #expect(zero < max)
+    }
+
+    @Test
+    func `Tagged byte literal construction matches Byte literal construction`() {
+        let tagged: Tagged<Byte.Test.Law.Checksum, Byte> = 0xA5
+        let byte: Byte = 0xA5
+        #expect(tagged.byte == byte)
     }
 }

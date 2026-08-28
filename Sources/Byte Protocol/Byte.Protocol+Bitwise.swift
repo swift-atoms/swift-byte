@@ -1,3 +1,5 @@
+public import Byte_Primitive
+
 extension Byte.`Protocol` where Self.Error == Never {
 
     @inlinable

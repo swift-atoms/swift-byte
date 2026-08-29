@@ -1,3 +1,4 @@
+import Byte_Protocol
 import Byte_Test_Support
 import Testing
 

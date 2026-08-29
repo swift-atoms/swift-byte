@@ -75,7 +75,8 @@ let package = Package(
             name: "Byte Borrowed",
             dependencies: [
                 .target(name: "Byte Protocol"),
-                .product(name: "Ownership", package: "swift-ownership"),
+                .product(name: "Carrier Protocol", package: "swift-carrier"),
+                .product(name: "Ownership Borrow", package: "swift-ownership"),
             ]
         ),
         .target(
@@ -97,6 +98,7 @@ let package = Package(
             name: "Byte Standard Library Integration",
             dependencies: [
                 .target(name: "Byte"),
+                .target(name: "Byte Protocol"),
                 .product(
                     name: "Carrier Standard Library Integration",
                     package: "swift-carrier"
@@ -108,10 +110,6 @@ let package = Package(
             dependencies: [
                 .target(name: "Byte"),
                 .target(name: "Byte Standard Library Integration"),
-                .product(
-                    name: "Ownership",
-                    package: "swift-ownership"
-                ),
             ],
             path: "Tests/Support"
         ),
@@ -119,13 +117,21 @@ let package = Package(
             name: "Byte Tests",
             dependencies: [
                 .target(name: "Byte"),
+                .target(name: "Byte Protocol"),
+                .target(name: "Byte Tagged"),
                 .target(name: "Byte Test Support"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(
+                    name: "Tagged Standard Library Integration",
+                    package: "swift-tagged"
+                ),
             ]
         ),
         .testTarget(
             name: "Byte Standard Library Integration Tests",
             dependencies: [
                 .target(name: "Byte"),
+                .target(name: "Byte Protocol"),
                 .target(name: "Byte Standard Library Integration"),
                 .target(name: "Byte Test Support"),
             ]
@@ -134,6 +140,7 @@ let package = Package(
             name: "Byte Bit Tests",
             dependencies: [
                 .target(name: "Byte Bit"),
+                .target(name: "Byte Protocol"),
                 .target(name: "Byte Test Support"),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Bit Pattern", package: "swift-bit"),

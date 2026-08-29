@@ -1,4 +1,5 @@
 import Byte_Test_Support
+import Byte_Protocol
 import Testing
 
 extension Byte {

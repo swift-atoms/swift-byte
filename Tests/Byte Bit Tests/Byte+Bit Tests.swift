@@ -1,6 +1,7 @@
 import Bit_Pattern
 import Bit
 import Byte_Bit
+import Byte_Protocol
 import Byte_Test_Support
 import Testing
 

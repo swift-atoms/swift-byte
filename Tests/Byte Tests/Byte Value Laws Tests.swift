@@ -1,4 +1,8 @@
+import Byte_Protocol
+import Byte_Tagged
 import Byte_Test_Support
+import Tagged
+import Tagged_Standard_Library_Integration
 import Testing
 
 extension Byte.Test {

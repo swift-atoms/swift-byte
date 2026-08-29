@@ -1,5 +1,6 @@
 public import Byte_Protocol
-public import Ownership
+public import Carrier_Protocol
+public import Ownership_Borrow
 
 extension Byte: Ownership.Borrow.`Protocol` {
 

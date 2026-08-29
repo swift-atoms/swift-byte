@@ -1,3 +1,4 @@
+import Byte_Protocol
 import Testing
 
 @testable import Byte

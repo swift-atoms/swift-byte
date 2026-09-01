@@ -69,6 +69,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Byte"),
                 .product(name: "Carrier", package: "swift-carrier"),
+                .product(name: "Carrier Protocol", package: "swift-carrier"),
             ]
         ),
         .target(

@@ -1,5 +1,5 @@
-import Byte_Test_Support
-import Byte_Protocol
+import Byte
+import Byte_Standard_Library_Integration
 import Testing
 
 extension Byte {
@@ -15,7 +15,7 @@ extension Byte.`String+Byte Test` {
 extension Byte.`String+Byte Test`.Unit {
     @Test
     func `decodes ASCII byte sequence as UTF-8`() {
-        let bytes: [Byte] = [0x48, 0x69]
+        let bytes = [0x48, 0x69].map { Byte(bitPattern: $0) }
         #expect(String(decoding: bytes, as: UTF8.self) == "Hi")
     }
 
@@ -27,24 +27,26 @@ extension Byte.`String+Byte Test`.Unit {
 
     @Test
     func `decodes valid multi-byte UTF-8 sequence`() {
-
-        let bytes: [Byte] = [0xC3, 0xA9]
+        let bytes = [0xC3, 0xA9].map { Byte(bitPattern: $0) }
         #expect(String(decoding: bytes, as: UTF8.self) == "é")
+    }
+
+    @Test
+    func `validating decode rejects invalid UTF-8`() {
+        #expect(String(validating: [Byte(bitPattern: 0x80)], as: UTF8.self) == nil)
+        #expect(String(validating: [Byte(bitPattern: 0x48)], as: UTF8.self) == "H")
     }
 }
 
 extension Byte.`String+Byte Test`.`Edge Case` {
     @Test
     func `invalid UTF-8 produces replacement character`() {
-
-        let bytes: [Byte] = [0x80]
-        #expect(String(decoding: bytes, as: UTF8.self) == "\u{FFFD}")
+        #expect(String(decoding: [Byte(bitPattern: 0x80)], as: UTF8.self) == "\u{FFFD}")
     }
 
     @Test
     func `null byte is preserved as U+0000`() {
-        let bytes: [Byte] = [0x00]
-        #expect(String(decoding: bytes, as: UTF8.self) == "\u{0000}")
+        #expect(String(decoding: [Byte(bitPattern: 0x00)], as: UTF8.self) == "\u{0000}")
     }
 }
 
@@ -52,7 +54,7 @@ extension Byte.`String+Byte Test`.Integration {
     @Test
     func `Byte decoding matches UInt8 decoding for same bytes`() {
         let uint8s: [UInt8] = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
-        let bytes = [Byte](uint8s)
+        let bytes = uint8s.map(Byte.init(bitPattern:))
 
         let fromUInt8 = String(decoding: uint8s, as: UTF8.self)
         let fromByte = String(decoding: bytes, as: UTF8.self)

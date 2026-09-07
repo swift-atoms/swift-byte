@@ -1,6 +1,4 @@
-public import Byte
-
-extension String {
+extension Swift.String {
 
     @inlinable
     public init(

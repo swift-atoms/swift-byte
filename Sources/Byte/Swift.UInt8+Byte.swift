@@ -1,6 +1,4 @@
-public import Byte
-
-extension UInt8 {
+extension Swift.UInt8 {
 
     @inlinable
     public init(bitPattern byte: Byte) {

@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Byte", targets: ["Byte"]),
-        .library(name: "Byte Standard Library Integration", targets: ["Byte Standard Library Integration"]),
-        .library(name: "Byte Foundation Library Integration", targets: ["Byte Foundation Library Integration"]),
+
+        .library(name: "Byte Foundation Integration", targets: ["Byte Foundation Integration"]),
         .library(name: "Byte Test Support", targets: ["Byte Test Support"]),
     ],
     dependencies: [
@@ -51,20 +51,13 @@ let package = Package(
             ],
             path: "Sources/Byte"
         ),
+        
         .target(
-            name: "Byte Standard Library Integration",
+            name: "Byte Foundation Integration",
             dependencies: [
                 .target(name: "Byte"),
             ],
-            path: "Sources/Byte Standard Library Integration"
-        ),
-        .target(
-            name: "Byte Foundation Library Integration",
-            dependencies: [
-                .target(name: "Byte"),
-                .target(name: "Byte Standard Library Integration"),
-            ],
-            path: "Sources/Byte Foundation Library Integration"
+            path: "Sources/Byte Foundation Integration"
         ),
         .target(
             name: "Byte Test Support",
@@ -78,9 +71,8 @@ let package = Package(
             dependencies: [
                 .target(name: "Byte"),
                 .product(name: "Bit", package: "swift-bit"),
-                .target(name: "Byte Standard Library Integration"),
                 .target(name: "Byte Test Support"),
-                .target(name: "Byte Foundation Library Integration"),
+                .target(name: "Byte Foundation Integration"),
             ],
             path: "Tests/Byte Tests"
         ),

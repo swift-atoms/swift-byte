@@ -29,6 +29,6 @@ extension Byte {
     }
 }
 
-extension Byte: Equatable {}
+extension Byte: Swift.Equatable {}
 
-extension Byte: Hashable {}
+extension Byte: Swift.Hashable {}

@@ -12,14 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(
-            name: "Byte",
-            targets: ["Byte"]
-        ),
-        .library(
-            name: "Byte Standard Library Integration",
-            targets: ["Byte Standard Library Integration"]
-        ),
+        .library(name: "Byte", targets: ["Byte"]),
+        .library(name: "Byte Standard Library Integration", targets: ["Byte Standard Library Integration"]),
+        .library(name: "Byte Foundation Library Integration", targets: ["Byte Foundation Library Integration"]),
+        .library(name: "Byte Test Support", targets: ["Byte Test Support"]),
     ],
     dependencies: [
         .package(
@@ -49,37 +45,51 @@ let package = Package(
             dependencies: [
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Index", package: "swift-index"),
-                .product(name: "Finite Bounded", package: "swift-finite"),
+                .product(name: "Finite", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
-            ]
+            ],
+            path: "Sources/Byte"
         ),
         .target(
             name: "Byte Standard Library Integration",
             dependencies: [
-                .target(name: "Byte")
-            ]
+                .target(name: "Byte"),
+            ],
+            path: "Sources/Byte Standard Library Integration"
+        ),
+        .target(
+            name: "Byte Foundation Library Integration",
+            dependencies: [
+                .target(name: "Byte"),
+                .target(name: "Byte Standard Library Integration"),
+            ],
+            path: "Sources/Byte Foundation Library Integration"
+        ),
+        .target(
+            name: "Byte Test Support",
+            dependencies: [
+                .target(name: "Byte"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Byte Tests",
             dependencies: [
                 .target(name: "Byte"),
                 .product(name: "Bit", package: "swift-bit"),
-            ]
-        ),
-        .testTarget(
-            name: "Byte Standard Library Integration Tests",
-            dependencies: [
-                .target(name: "Byte"),
                 .target(name: "Byte Standard Library Integration"),
-            ]
+                .target(name: "Byte Test Support"),
+                .target(name: "Byte Foundation Library Integration"),
+            ],
+            path: "Tests/Byte Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -88,8 +98,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

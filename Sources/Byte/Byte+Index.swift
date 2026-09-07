@@ -1,6 +1,6 @@
 public import Bit
 public import Index
-public import Finite_Bounded
+public import Finite
 public import Ordinal
 public import Tagged
 

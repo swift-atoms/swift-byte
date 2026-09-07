@@ -2,7 +2,7 @@ import Byte
 import Testing
 
 @Suite
-struct `Swift.Array+Byte Tests` {
+struct `Byte array literals preserve UTF8 string contents` {
 
     @Test
     func `a string literal spells its UTF-8 bytes`() {

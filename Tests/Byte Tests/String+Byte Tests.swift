@@ -2,30 +2,30 @@ import Byte
 import Testing
 
 extension Byte {
-    @Suite struct `String+Byte Test` {}
+    @Suite struct `Strings decode byte sequences as UTF8` {}
 }
 
-extension Byte.`String+Byte Test` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+extension Byte.`Strings decode byte sequences as UTF8` {
+    @Suite struct `String decoding accepts valid UTF8 and validates invalid sequences` {}
+    @Suite struct `String decoding handles invalid sequences and null bytes` {}
+    @Suite struct `Byte decoding agrees with unsigned integer decoding` {}
 }
 
-extension Byte.`String+Byte Test`.Unit {
+extension Byte.`Strings decode byte sequences as UTF8`.`String decoding accepts valid UTF8 and validates invalid sequences` {
     @Test
-    func `decodes ASCII byte sequence as UTF-8`() {
+    func `String decoding preserves ASCII byte contents`() {
         let bytes = [0x48, 0x69].map { Byte(bitPattern: $0) }
         #expect(String(decoding: bytes, as: UTF8.self) == "Hi")
     }
 
     @Test
-    func `decodes empty sequence to empty string`() {
+    func `String decoding maps an empty sequence to an empty string`() {
         let bytes: [Byte] = []
         #expect(String(decoding: bytes, as: UTF8.self).isEmpty)
     }
 
     @Test
-    func `decodes valid multi-byte UTF-8 sequence`() {
+    func `String decoding preserves valid multibyte UTF8 contents`() {
         let bytes = [0xC3, 0xA9].map { Byte(bitPattern: $0) }
         #expect(String(decoding: bytes, as: UTF8.self) == "é")
     }
@@ -37,7 +37,7 @@ extension Byte.`String+Byte Test`.Unit {
     }
 }
 
-extension Byte.`String+Byte Test`.`Edge Case` {
+extension Byte.`Strings decode byte sequences as UTF8`.`String decoding handles invalid sequences and null bytes` {
     @Test
     func `invalid UTF-8 produces replacement character`() {
         #expect(String(decoding: [Byte(bitPattern: 0x80)], as: UTF8.self) == "\u{FFFD}")
@@ -49,7 +49,7 @@ extension Byte.`String+Byte Test`.`Edge Case` {
     }
 }
 
-extension Byte.`String+Byte Test`.Integration {
+extension Byte.`Strings decode byte sequences as UTF8`.`Byte decoding agrees with unsigned integer decoding` {
     @Test
     func `Byte decoding matches UInt8 decoding for same bytes`() {
         let uint8s: [UInt8] = [0x48, 0x65, 0x6C, 0x6C, 0x6F]

@@ -2,10 +2,10 @@ import Byte
 import Testing
 
 extension Byte {
-    @Suite struct `Integer+Byte Test` {}
+    @Suite struct `Unsigned byte conversions preserve every bit pattern` {}
 }
 
-extension Byte.`Integer+Byte Test` {
+extension Byte.`Unsigned byte conversions preserve every bit pattern` {
 
     @Test
     func `UInt8 initializes from the Byte bit pattern`() {

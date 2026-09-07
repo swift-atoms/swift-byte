@@ -2,7 +2,7 @@ import Bit
 import Byte
 import Testing
 
-extension Byte.Test.Unit {
+extension Byte.`Bytes preserve all eight bits through construction and indexing`.`Byte storage construction and indexing preserve bit values` {
 
     @Test
     func `Byte occupies one octet`() {

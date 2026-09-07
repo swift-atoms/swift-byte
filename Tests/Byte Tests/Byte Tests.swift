@@ -3,16 +3,16 @@ import Byte
 import Testing
 
 extension Byte {
-    @Suite struct Test {}
+    @Suite struct `Bytes preserve all eight bits through construction and indexing` {}
 }
 
-extension Byte.Test {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+extension Byte.`Bytes preserve all eight bits through construction and indexing` {
+    @Suite struct `Byte storage construction and indexing preserve bit values` {}
+    @Suite struct `No additional byte edge cases are defined` {}
+    @Suite struct `Every byte pattern agrees with indexed construction` {}
 }
 
-extension Byte.Test.Unit {
+extension Byte.`Bytes preserve all eight bits through construction and indexing`.`Byte storage construction and indexing preserve bit values` {
 
     @Test
     func `bit pattern round-trips`() {
@@ -29,7 +29,7 @@ extension Byte.Test.Unit {
     }
 }
 
-extension Byte.Test.Integration {
+extension Byte.`Bytes preserve all eight bits through construction and indexing`.`Every byte pattern agrees with indexed construction` {
 
     @Test
     func `every bit pattern is a distinct byte`() {

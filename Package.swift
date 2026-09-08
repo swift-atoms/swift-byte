@@ -18,6 +18,8 @@ let package = Package(
         .library(name: "Byte Test Support", targets: ["Byte Test Support"]),
     ],
     dependencies: [
+
+        .package(url: "https://github.com/swift-atoms/swift-carrier.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-bit.git",
             branch: "main"
@@ -43,6 +45,7 @@ let package = Package(
         .target(
             name: "Byte",
             dependencies: [
+                .product(name: "Carrier", package: "swift-carrier"),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Finite", package: "swift-finite"),
@@ -75,6 +78,12 @@ let package = Package(
                 .target(name: "Byte Foundation Integration"),
             ],
             path: "Tests/Byte Tests"
+        ),
+        .testTarget(
+            name: "Consolidated Byte Carrier Tests",
+            dependencies: [
+.target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier")],
+            path: "Tests/Consolidated swift-byte-carrier"
         ),
     ],
     swiftLanguageModes: [.v6]

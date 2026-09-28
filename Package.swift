@@ -16,8 +16,18 @@ let package = Package(
 
         .library(name: "Byte Foundation Integration", targets: ["Byte Foundation Integration"]),
         .library(name: "Byte Test Support", targets: ["Byte Test Support"]),
+        .library(name: "Byte Collection Test Support", targets: ["Byte Collection Test Support"]),
+    ],
+    traits: [
+        .trait(name: "BitPattern", description: "BitPattern integration"),
+
+        .trait(name: "Ownership", description: "Borrowed byte access through a read-only span"),
+        .trait(name: "Collection", description: "Absorbed Collection integration"),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-bit-pattern.git", branch: "main"),
+
+        .package(url: "https://github.com/swift-atoms/swift-ownership.git", branch: "main"),
 
         .package(url: "https://github.com/swift-atoms/swift-carrier.git", branch: "main"),
         .package(
@@ -30,8 +40,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-finite.git",
-            branch: "main",
-            traits: ["Tagged"]
+            branch: "main", traits: ["Tagged"]
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
@@ -41,21 +50,29 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
+        .package(url: "https://github.com/swift-atoms/swift-collection.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-iterator.git", branch: "main"),
     ],
     targets: [
+        .testTarget(name: "Decision Byte Bit Tests", dependencies: [.target(name: "Byte"), .product(name: "Bit", package: "swift-bit"), .product(name: "Bit Pattern", package: "swift-bit-pattern", condition: .when(traits: ["BitPattern"]))], path: "Tests/Decision Byte Bit Tests"),
+
         .target(
             name: "Byte",
             dependencies: [
+                .product(name: "Bit Pattern", package: "swift-bit-pattern", condition: .when(traits: ["BitPattern"])),
+
+                .product(name: "Ownership", package: "swift-ownership", condition: .when(traits: ["Ownership"])),
                 .product(name: "Carrier", package: "swift-carrier"),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Finite", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Collection", package: "swift-collection", condition: .when(traits: ["Collection"])),
             ],
             path: "Sources/Byte"
         ),
-        
+
         .target(
             name: "Byte Foundation Integration",
             dependencies: [
@@ -86,6 +103,8 @@ let package = Package(
 .target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier")],
             path: "Tests/Consolidated swift-byte-carrier"
         ),
+        .testTarget(name: "Absorbed swift-byte-collection Byte Collection Tests", dependencies: [.target(name: "Byte"), .target(name: "Byte Collection Test Support"), .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Collection"])), .product(name: "Collection", package: "swift-collection", condition: .when(traits: ["Collection"])), .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Collection"]))], path: "Tests/Absorbed/swift-byte-collection/Byte Collection Tests"),
+        .target(name: "Byte Collection Test Support", dependencies: [.target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Collection"]))], path: "Tests/Absorbed/swift-byte-collection/Support"),
     ],
     swiftLanguageModes: [.v6]
 )

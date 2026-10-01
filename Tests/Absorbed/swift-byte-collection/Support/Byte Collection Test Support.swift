@@ -1,3 +1,3 @@
 #if Collection
-public import Carrier
+import Carrier
 #endif

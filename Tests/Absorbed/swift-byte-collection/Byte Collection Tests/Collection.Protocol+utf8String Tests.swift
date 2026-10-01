@@ -1,5 +1,5 @@
 #if Collection
-public import Carrier
+import Carrier
 import Byte_Collection_Test_Support
 import Collection
 import Iterator

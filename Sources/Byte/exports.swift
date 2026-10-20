@@ -5,5 +5,5 @@
 @_exported public import Tagged
 
 #if Ownership
-@_exported public import Ownership
+    @_exported public import Ownership
 #endif

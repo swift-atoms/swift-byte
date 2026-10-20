@@ -11,7 +11,9 @@ extension Byte.`Strings decode byte sequences as UTF8` {
     @Suite struct `Byte decoding agrees with unsigned integer decoding` {}
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`.`String decoding accepts valid UTF8 and validates invalid sequences` {
+extension Byte.`Strings decode byte sequences as UTF8`
+    .`String decoding accepts valid UTF8 and validates invalid sequences`
+{
     @Test
     func `String decoding preserves ASCII byte contents`() {
         let bytes = [0x48, 0x69].map { Byte(bitPattern: $0) }
@@ -37,7 +39,9 @@ extension Byte.`Strings decode byte sequences as UTF8`.`String decoding accepts 
     }
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`.`String decoding handles invalid sequences and null bytes` {
+extension Byte.`Strings decode byte sequences as UTF8`
+    .`String decoding handles invalid sequences and null bytes`
+{
     @Test
     func `invalid UTF-8 produces replacement character`() {
         #expect(String(decoding: [Byte(bitPattern: 0x80)], as: UTF8.self) == "\u{FFFD}")
@@ -49,7 +53,9 @@ extension Byte.`Strings decode byte sequences as UTF8`.`String decoding handles 
     }
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`.`Byte decoding agrees with unsigned integer decoding` {
+extension Byte.`Strings decode byte sequences as UTF8`
+    .`Byte decoding agrees with unsigned integer decoding`
+{
     @Test
     func `Byte decoding matches UInt8 decoding for same bytes`() {
         let uint8s: [UInt8] = [0x48, 0x65, 0x6C, 0x6C, 0x6F]

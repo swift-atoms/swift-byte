@@ -40,7 +40,8 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-finite.git",
-            branch: "main", traits: ["Tagged"]
+            branch: "main",
+            traits: ["Tagged"]
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
@@ -54,21 +55,44 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-iterator.git", branch: "main"),
     ],
     targets: [
-        .testTarget(name: "Decision Byte Bit Tests", dependencies: [.target(name: "Byte"), .product(name: "Bit", package: "swift-bit"), .product(name: "Bit Pattern", package: "swift-bit-pattern", condition: .when(traits: ["BitPattern"]))], path: "Tests/Decision Byte Bit Tests"),
+        .testTarget(
+            name: "Decision Byte Bit Tests",
+            dependencies: [
+                .target(name: "Byte"), .product(name: "Bit", package: "swift-bit"),
+                .product(
+                    name: "Bit Pattern",
+                    package: "swift-bit-pattern",
+                    condition: .when(traits: ["BitPattern"])
+                ),
+            ],
+            path: "Tests/Decision Byte Bit Tests"
+        ),
 
         .target(
             name: "Byte",
             dependencies: [
-                .product(name: "Bit Pattern", package: "swift-bit-pattern", condition: .when(traits: ["BitPattern"])),
+                .product(
+                    name: "Bit Pattern",
+                    package: "swift-bit-pattern",
+                    condition: .when(traits: ["BitPattern"])
+                ),
 
-                .product(name: "Ownership", package: "swift-ownership", condition: .when(traits: ["Ownership"])),
+                .product(
+                    name: "Ownership",
+                    package: "swift-ownership",
+                    condition: .when(traits: ["Ownership"])
+                ),
                 .product(name: "Carrier", package: "swift-carrier"),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Finite", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
-                .product(name: "Collection", package: "swift-collection", condition: .when(traits: ["Collection"])),
+                .product(
+                    name: "Collection",
+                    package: "swift-collection",
+                    condition: .when(traits: ["Collection"])
+                ),
             ],
             path: "Sources/Byte"
         ),
@@ -76,14 +100,14 @@ let package = Package(
         .target(
             name: "Byte Foundation Integration",
             dependencies: [
-                .target(name: "Byte"),
+                .target(name: "Byte")
             ],
             path: "Sources/Byte Foundation Integration"
         ),
         .target(
             name: "Byte Test Support",
             dependencies: [
-                .target(name: "Byte"),
+                .target(name: "Byte")
             ],
             path: "Tests/Support"
         ),
@@ -100,24 +124,58 @@ let package = Package(
         .testTarget(
             name: "Consolidated Byte Carrier Tests",
             dependencies: [
-.target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier")],
+                .target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier"),
+            ],
             path: "Tests/Consolidated swift-byte-carrier"
         ),
-        .testTarget(name: "Absorbed swift-byte-collection Byte Collection Tests", dependencies: [.target(name: "Byte"), .target(name: "Byte Collection Test Support"), .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Collection"])), .product(name: "Collection", package: "swift-collection", condition: .when(traits: ["Collection"])), .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Collection"]))], path: "Tests/Absorbed/swift-byte-collection/Byte Collection Tests"),
-        .target(name: "Byte Collection Test Support", dependencies: [.target(name: "Byte"), .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Collection"]))], path: "Tests/Absorbed/swift-byte-collection/Support"),
+        .testTarget(
+            name: "Absorbed swift-byte-collection Byte Collection Tests",
+            dependencies: [
+                .target(name: "Byte"), .target(name: "Byte Collection Test Support"),
+                .product(
+                    name: "Carrier",
+                    package: "swift-carrier",
+                    condition: .when(traits: ["Collection"])
+                ),
+                .product(
+                    name: "Collection",
+                    package: "swift-collection",
+                    condition: .when(traits: ["Collection"])
+                ),
+                .product(
+                    name: "Iterator",
+                    package: "swift-iterator",
+                    condition: .when(traits: ["Collection"])
+                ),
+            ],
+            path: "Tests/Absorbed/swift-byte-collection/Byte Collection Tests"
+        ),
+        .target(
+            name: "Byte Collection Test Support",
+            dependencies: [
+                .target(name: "Byte"),
+                .product(
+                    name: "Carrier",
+                    package: "swift-carrier",
+                    condition: .when(traits: ["Collection"])
+                ),
+            ],
+            path: "Tests/Absorbed/swift-byte-collection/Support"
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
 
 for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }

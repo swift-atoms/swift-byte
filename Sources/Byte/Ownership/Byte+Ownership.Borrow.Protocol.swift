@@ -1,8 +1,8 @@
 #if Ownership
-public import Ownership
+    public import Ownership
 
-extension Byte: Ownership.Borrow.`Protocol` {
+    extension Byte: Ownership.Borrow.`Protocol` {
 
-    public typealias Borrowed = Swift.Span<Byte>
-}
+        public typealias Borrowed = Swift.Span<Byte>
+    }
 #endif

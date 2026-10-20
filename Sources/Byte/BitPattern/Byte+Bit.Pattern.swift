@@ -1,10 +1,10 @@
 #if BitPattern
-public import Bit_Pattern
+    public import Bit_Pattern
 
-extension Byte {
-    @inlinable
-    public var bits: Bit.Pattern<UInt8>.Mask {
-        Bit.Pattern<UInt8>.Mask(underlying)
+    extension Byte {
+        @inlinable
+        public var bits: Bit.Pattern<UInt8>.Mask {
+            Bit.Pattern<UInt8>.Mask(underlying)
+        }
     }
-}
 #endif

@@ -12,7 +12,9 @@ extension Byte.`Bytes preserve all eight bits through construction and indexing`
     @Suite struct `Every byte pattern agrees with indexed construction` {}
 }
 
-extension Byte.`Bytes preserve all eight bits through construction and indexing`.`Byte storage construction and indexing preserve bit values` {
+extension Byte.`Bytes preserve all eight bits through construction and indexing`
+    .`Byte storage construction and indexing preserve bit values`
+{
 
     @Test
     func `bit pattern round-trips`() {
@@ -24,12 +26,16 @@ extension Byte.`Bytes preserve all eight bits through construction and indexing`
     func `equality and hashing distinguish bit patterns`() {
         #expect(Byte(bitPattern: 0x10) == Byte(bitPattern: 0x10))
         #expect(Byte(bitPattern: 0x10) != Byte(bitPattern: 0x11))
-        let set: Set<Byte> = [Byte(bitPattern: 0x10), Byte(bitPattern: 0x10), Byte(bitPattern: 0x11)]
+        let set: Set<Byte> = [
+            Byte(bitPattern: 0x10), Byte(bitPattern: 0x10), Byte(bitPattern: 0x11),
+        ]
         #expect(set.count == 2)
     }
 }
 
-extension Byte.`Bytes preserve all eight bits through construction and indexing`.`Every byte pattern agrees with indexed construction` {
+extension Byte.`Bytes preserve all eight bits through construction and indexing`
+    .`Every byte pattern agrees with indexed construction`
+{
 
     @Test
     func `every bit pattern is a distinct byte`() {

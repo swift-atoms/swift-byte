@@ -1,7 +1,4 @@
 import Byte
-import Byte
-import Carrier
-import Carrier
 import Carrier
 import Testing
 

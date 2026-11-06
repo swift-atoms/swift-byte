@@ -2,17 +2,19 @@ import Bit
 import Byte
 import Testing
 
-extension Byte {
+enum `Byte Tests` {}
+
+extension `Byte Tests` {
     @Suite struct `Bytes preserve all eight bits through construction and indexing` {}
 }
 
-extension Byte.`Bytes preserve all eight bits through construction and indexing` {
+extension `Byte Tests`.`Bytes preserve all eight bits through construction and indexing` {
     @Suite struct `Byte storage construction and indexing preserve bit values` {}
     @Suite struct `No additional byte edge cases are defined` {}
     @Suite struct `Every byte pattern agrees with indexed construction` {}
 }
 
-extension Byte.`Bytes preserve all eight bits through construction and indexing`
+extension `Byte Tests`.`Bytes preserve all eight bits through construction and indexing`
     .`Byte storage construction and indexing preserve bit values`
 {
 
@@ -33,7 +35,7 @@ extension Byte.`Bytes preserve all eight bits through construction and indexing`
     }
 }
 
-extension Byte.`Bytes preserve all eight bits through construction and indexing`
+extension `Byte Tests`.`Bytes preserve all eight bits through construction and indexing`
     .`Every byte pattern agrees with indexed construction`
 {
 

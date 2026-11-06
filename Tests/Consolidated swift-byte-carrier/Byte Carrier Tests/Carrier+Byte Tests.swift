@@ -14,17 +14,19 @@ private func carrierUnderlying<Value: Carrier.`Protocol`>(_ value: Value) -> Val
     value.underlying
 }
 
-extension Byte {
+enum `Byte Tests` {}
+
+extension `Byte Tests` {
     @Suite struct `Carrier+Byte Test` {}
 }
 
-extension Byte.`Carrier+Byte Test` {
+extension `Byte Tests`.`Carrier+Byte Test` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
 
-extension Byte.`Carrier+Byte Test`.Unit {
+extension `Byte Tests`.`Carrier+Byte Test`.Unit {
     @Test
     func `UInt8 carrier byte accessor returns matching Byte`() {
         let raw: UInt8 = 0x42
@@ -57,7 +59,7 @@ extension Byte.`Carrier+Byte Test`.Unit {
     }
 }
 
-extension Byte.`Carrier+Byte Test`.`Edge Case` {
+extension `Byte Tests`.`Carrier+Byte Test`.`Edge Case` {
     @Test
     func `zero round-trips`() {
         let raw: UInt8 = 0
@@ -73,7 +75,7 @@ extension Byte.`Carrier+Byte Test`.`Edge Case` {
     }
 }
 
-extension Byte.`Carrier+Byte Test`.Integration {
+extension `Byte Tests`.`Carrier+Byte Test`.Integration {
     @Test
     func `custom UInt8 carrier converts to and from Byte`() {
         let octet = Octet(Byte(0xA5))

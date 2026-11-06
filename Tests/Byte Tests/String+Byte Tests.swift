@@ -1,17 +1,17 @@
 import Byte
 import Testing
 
-extension Byte {
+extension `Byte Tests` {
     @Suite struct `Strings decode byte sequences as UTF8` {}
 }
 
-extension Byte.`Strings decode byte sequences as UTF8` {
+extension `Byte Tests`.`Strings decode byte sequences as UTF8` {
     @Suite struct `String decoding accepts valid UTF8 and validates invalid sequences` {}
     @Suite struct `String decoding handles invalid sequences and null bytes` {}
     @Suite struct `Byte decoding agrees with unsigned integer decoding` {}
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`
+extension `Byte Tests`.`Strings decode byte sequences as UTF8`
     .`String decoding accepts valid UTF8 and validates invalid sequences`
 {
     @Test
@@ -39,7 +39,7 @@ extension Byte.`Strings decode byte sequences as UTF8`
     }
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`
+extension `Byte Tests`.`Strings decode byte sequences as UTF8`
     .`String decoding handles invalid sequences and null bytes`
 {
     @Test
@@ -53,7 +53,7 @@ extension Byte.`Strings decode byte sequences as UTF8`
     }
 }
 
-extension Byte.`Strings decode byte sequences as UTF8`
+extension `Byte Tests`.`Strings decode byte sequences as UTF8`
     .`Byte decoding agrees with unsigned integer decoding`
 {
     @Test

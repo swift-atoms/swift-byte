@@ -1,11 +1,11 @@
 import Byte
 import Testing
 
-extension Byte {
+extension `Byte Tests` {
     @Suite struct `Unsigned byte conversions preserve every bit pattern` {}
 }
 
-extension Byte.`Unsigned byte conversions preserve every bit pattern` {
+extension `Byte Tests`.`Unsigned byte conversions preserve every bit pattern` {
 
     @Test
     func `UInt8 initializes from the Byte bit pattern`() {

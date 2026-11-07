@@ -24,14 +24,18 @@
         }
     }
 
-    @Suite
-    struct `Collection.Protocol utf8String Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-    }
+enum `Collection.Protocol+utf8String Tests` {}
 
-    extension `Collection.Protocol utf8String Tests`.Unit {
+extension `Collection.Protocol+utf8String Tests` {
+        @Suite
+        struct `Collection.Protocol utf8String Tests` {
+            @Suite struct Unit {}
+            @Suite struct `Edge Case` {}
+            @Suite struct Integration {}
+        }
+}
+
+    extension `Collection.Protocol+utf8String Tests`.`Collection.Protocol utf8String Tests`.Unit {
         @Test
         func `decodes a byte-collection of "hi" to the Swift.String "hi"`() {
             let bytes: [Byte] = [Byte(bitPattern: 0x68), Byte(bitPattern: 0x69)]
@@ -52,7 +56,7 @@
         }
     }
 
-    extension `Collection.Protocol utf8String Tests`.`Edge Case` {
+    extension `Collection.Protocol+utf8String Tests`.`Collection.Protocol utf8String Tests`.`Edge Case` {
         @Test
         func `empty byte-collection decodes to the empty string`() {
             let collection = ByteSource(bytes: [])

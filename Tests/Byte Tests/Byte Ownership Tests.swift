@@ -5,13 +5,13 @@
     @Suite("Byte × Ownership.Borrow")
     struct Byte_Ownership_Tests {
 
-        @Test("Byte conforms to Ownership.Borrow.Protocol")
-        func borrowProtocolConformance() {
+        @Test
+        func `Byte conforms to Ownership.Borrow.Protocol`() {
             requireBorrowProtocol(Byte.self)
         }
 
-        @Test("Byte's borrowed representation is a read-only span")
-        func borrowedRepresentation() {
+        @Test
+        func `Byte's borrowed representation is a read-only span`() {
             let owner = Ownership.Unique(Byte(bitPattern: 0x2A))
             let borrowed: Byte.Borrowed = owner.span
 

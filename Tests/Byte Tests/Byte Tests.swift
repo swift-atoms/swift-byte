@@ -42,7 +42,7 @@ extension `Byte Tests`.`Bytes preserve all eight bits through construction and i
     @Test
     func `every bit pattern is a distinct byte`() {
         var seen: Set<Byte> = []
-        for pattern in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { pattern in
             seen.insert(Byte(bitPattern: pattern))
         }
         #expect(seen.count == 256)
@@ -50,7 +50,7 @@ extension `Byte Tests`.`Bytes preserve all eight bits through construction and i
 
     @Test
     func `tabulated construction and subscript agree for every byte`() {
-        for pattern in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { pattern in
             let byte = Byte(bitPattern: pattern)
             let rebuilt = Byte { index in byte[index] }
             #expect(rebuilt == byte)

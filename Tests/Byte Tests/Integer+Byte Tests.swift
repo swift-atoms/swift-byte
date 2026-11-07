@@ -15,7 +15,7 @@ extension `Byte Tests`.`Unsigned byte conversions preserve every bit pattern` {
 
     @Test
     func `UInt8 bit-pattern conversion round-trips every byte`() {
-        for pattern in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { pattern in
             let byte = Byte(bitPattern: pattern)
             #expect(UInt8(bitPattern: byte) == pattern)
         }

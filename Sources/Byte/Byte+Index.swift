@@ -11,7 +11,7 @@ extension Byte {
         _ bit: (Index<Bit>.Bounded<8>) -> Bit
     ) {
         self.init(repeating: .zero)
-        for position in 0..<8 {
+        (0..<8).forEach { position in
             let index = Self.index(position)
             self[index] = bit(index)
         }

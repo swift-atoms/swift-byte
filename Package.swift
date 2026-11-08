@@ -58,7 +58,7 @@ let package = Package(
         .testTarget(
             name: "Decision Byte Bit Tests",
             dependencies: [
-                .target(name: "Byte"), .product(name: "Bit", package: "swift-bit", condition: .when(traits: ["BitPattern"])),
+                .target(name: "Byte"), .product(name: "Bit", package: "swift-bit"),
                 .product(
                     name: "Bit Pattern",
                     package: "swift-bit-pattern",

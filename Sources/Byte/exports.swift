@@ -7,3 +7,9 @@
 #if Ownership
     @_exported public import Ownership
 #endif
+
+#if Collection
+    import Carrier
+
+    @_exported public import Collection
+#endif

@@ -1,5 +1,5 @@
 #if Collection
     import Carrier
 
-    @_exported public import Collection
+    public import Collection
 #endif

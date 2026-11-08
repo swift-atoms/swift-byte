@@ -24,16 +24,16 @@
         }
     }
 
-enum `Collection.Protocol+utf8String Tests` {}
+    enum `Collection.Protocol+utf8String Tests` {}
 
-extension `Collection.Protocol+utf8String Tests` {
+    extension `Collection.Protocol+utf8String Tests` {
         @Suite
         struct `Collection.Protocol utf8String Tests` {
             @Suite struct Unit {}
             @Suite struct `Edge Case` {}
             @Suite struct Integration {}
         }
-}
+    }
 
     extension `Collection.Protocol+utf8String Tests`.`Collection.Protocol utf8String Tests`.Unit {
         @Test

@@ -2,7 +2,7 @@
     import Byte
     import Testing
 
-    @Suite("Byte × Ownership.Borrow")
+    @Suite
     struct Byte_Ownership_Tests {
 
         @Test

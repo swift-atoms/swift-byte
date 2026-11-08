@@ -1,5 +1,5 @@
 #if Collection
     import Carrier
 
-    public import Collection
+    import Collection
 #endif

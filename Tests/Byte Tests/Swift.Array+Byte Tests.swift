@@ -29,3 +29,23 @@ extension `Swift.Array+Byte Tests` {
         }
     }
 }
+
+extension `Swift.Array+Byte Tests` {
+    @Suite
+    struct `Byte arrays built from bit patterns keep every byte` {
+
+        @Test
+        func `contiguous bit patterns become the same bytes`() {
+            let bytes = [Byte](bitPatterns: [0x4F, 0x4B] as [UInt8])
+
+            #expect(bytes == [Byte(bitPattern: 0x4F), Byte(bitPattern: 0x4B)])
+        }
+
+        @Test
+        func `non-contiguous bit patterns become the same bytes`() {
+            let bytes = [Byte](bitPatterns: (0x41 as UInt8)...0x43)
+
+            #expect(bytes == [Byte(bitPattern: 0x41), Byte(bitPattern: 0x42), Byte(bitPattern: 0x43)])
+        }
+    }
+}

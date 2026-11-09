@@ -32,3 +32,15 @@ extension Swift.Array where Element == Byte {
         self = string.utf8.map(Byte.init(bitPattern:))
     }
 }
+
+extension Swift.Array where Element == Byte {
+
+    @inlinable
+    public init<BitPatterns>(bitPatterns: BitPatterns)
+    where BitPatterns: Swift.Collection<UInt8> {
+        let contiguous = bitPatterns.withContiguousStorageIfAvailable { patterns in
+            unsafe patterns.map(Byte.init(bitPattern:))
+        }
+        self = contiguous ?? bitPatterns.map(Byte.init(bitPattern:))
+    }
+}

@@ -1,6 +1,6 @@
 public import Carrier
 
-extension Byte: Carrier.`Protocol` {
+extension Byte: Carrier.Bitwise.`Protocol` {
 
     public typealias Underlying = UInt8
 

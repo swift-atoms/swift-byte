@@ -5,7 +5,7 @@ extension Swift.String {
         decoding bytes: some Swift.Sequence<Byte>,
         as encoding: Swift.UTF8.Type
     ) {
-        self.init(decoding: bytes.lazy.map(\.bitPattern), as: encoding)
+        self.init(decoding: bytes.lazy.map { $0.bitPattern }, as: encoding)
     }
 
     @inlinable
@@ -13,6 +13,6 @@ extension Swift.String {
         validating bytes: some Swift.Collection<Byte>,
         as encoding: Swift.UTF8.Type
     ) {
-        self.init(validating: bytes.lazy.map(\.bitPattern), as: encoding)
+        self.init(validating: bytes.lazy.map { $0.bitPattern }, as: encoding)
     }
 }
